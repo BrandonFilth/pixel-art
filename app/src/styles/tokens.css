@@ -1,0 +1,78 @@
+/* Tokens de diseño (design.md §8.3). 60-30-10: bg 60 %, surface 30 %, accent 10 %. */
+
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../assets/fonts/Silkscreen-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../assets/fonts/Silkscreen-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('../assets/fonts/AtkinsonHyperlegible-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('../assets/fonts/AtkinsonHyperlegible-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --color-bg: #e5dde6;
+  --color-surface: #dfcae1;
+  --color-surface-strong: #c0a0c3;
+  --color-accent: #8f7193;
+  --color-accent-hover: #a788ab;
+  --color-ink: #000000;
+  --color-shadow: #2b2b2b;
+  --color-on-dark: #ffffff;
+  --color-paper: #ffffff;
+  --color-checker: #efeaf0;
+  --color-grid: #d9d3da;
+  --color-disabled-bg: #d6d3d6;
+  --color-disabled-ink: #4a4a4a;
+  --color-danger: #8b1e2d;
+  --color-success: #1d5c34;
+
+  --font-pixel: 'Silkscreen', ui-monospace, monospace;
+  --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 28px;
+  --lh-body: 1.5;
+
+  --border-w: 3px;
+  --border-w-thin: 2px;
+  --border: var(--border-w) solid var(--color-ink);
+  --border-thin: var(--border-w-thin) solid var(--color-ink);
+  --shadow-hard: 4px 4px 0 0 var(--color-shadow);
+  --shadow-hard-pressed: 1px 1px 0 0 var(--color-shadow);
+  --radius: 0;
+  --accent-line: 3px solid var(--color-accent);
+  --grid-line: 1px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --tap-min: 44px;
+  --focus-ring: 3px solid var(--color-ink);
+  --layout-max: 420px;
+  /* Barra de navegación inferior: alto del botón + relleno + borde + zona segura. */
+  --nav-item-h: 48px;
+  --nav-h: calc(var(--nav-item-h) + 2 * var(--space-2) + var(--border-w) + env(safe-area-inset-bottom, 0px));
+}

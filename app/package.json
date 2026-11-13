@@ -1,0 +1,29 @@
+{
+  "name": "dot-pixel",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DOT PIXEL: dibujos pixel art de 16x16 en Products Devnet",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:red": "node scripts/test-red.mjs",
+    "preview": "vite preview"
+  },
+  "devEngines": {
+    "packageManager": { "name": "pnpm", "version": "12.6.0", "onFail": "download" }
+  },
+  "dependencies": {
+    "@parity/product-sdk": "0.39.0",
+    "@parity/product-sdk-descriptors": "npm:@polkadot-community-foundation/product-sdk-descriptors@0.14.0-pcf.1",
+    "polkadot-api": "3.2.1",
+    "viem": "2.56.9"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "8.3.1",
+    "vitest": "5.0.3"
+  }
+}

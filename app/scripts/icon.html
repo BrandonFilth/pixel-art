@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <body style="margin:0;background:#8f7193">
+    <canvas id="c" width="512" height="512"></canvas>
+    <script>
+      // Icono 512×512 para el manifest (references/publicar.md, §4): corazón de la portada sobre el acento.
+      const rows = [
+        '................', '................', '...5555...5555..', '..566665.566665.',
+        '.56777766677776.', '.56788777777776.', '.56787777777776.', '.56777777777776.',
+        '..567777777776..', '...5677777776...', '....56777776....', '.....567776.....',
+        '......5676......', '.......56.......', '................', '................',
+      ];
+      const pal = { 5: '#5b3f60', 6: '#8f7193', 7: '#c0a0c3', 8: '#e5dde6' };
+      const ctx = document.getElementById('c').getContext('2d');
+      ctx.fillStyle = '#e5dde6';
+      ctx.fillRect(0, 0, 512, 512);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, 512, 16); ctx.fillRect(0, 496, 512, 16); ctx.fillRect(0, 0, 16, 512); ctx.fillRect(496, 0, 16, 512);
+      const cell = 28, off = (512 - cell * 16) / 2;
+      rows.forEach((r, y) => [...r].forEach((ch, x) => {
+        if (ch === '.') return;
+        ctx.fillStyle = pal[ch];
+        ctx.fillRect(off + x * cell, off + y * cell, cell, cell);
+      }));
+    </script>
+  </body>
+</html>
