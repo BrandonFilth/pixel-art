@@ -8,7 +8,7 @@ import { blockTicker } from './chain/ticker';
 import { store, type AppState } from './state/store';
 import { banner, lockedScreen } from './ui/components';
 import { clear, fmtBlock, h } from './ui/dom';
-import { icon } from './ui/icons';
+import { cubeIcon, icon } from './ui/icons';
 import { PUBLIC_ROUTES, currentRoute, startRouter, type Route, type RouteName } from './ui/router';
 import { mountTxModal } from './ui/txModal';
 import { adminScreen } from './ui/screens/admin';
@@ -22,7 +22,7 @@ const root = document.getElementById('app')!;
 
 // ---------- Esqueleto ----------
 const blockText = h('span', {}, '—');
-const blockChip = h('div', { class: 'block-chip', role: 'status', 'aria-label': 'Bloque actual: cargando' }, icon('cube'), blockText);
+const blockChip = h('div', { class: 'block-chip', role: 'status', 'aria-label': 'Bloque actual: cargando' }, cubeIcon(), blockText);
 const header = h(
   'header',
   { class: 'app-header' },
@@ -67,7 +67,7 @@ function renderBanners(): void {
   const s = store.get();
   clear(banners);
   if (s.session === 'outsideHost')
-    banners.append(banner('warn', h('p', {}, 'Abre esta app dentro de Polkadot Desktop o de la Polkadot App para conectar tu cuenta. Fuera del Host solo puedes ver el inicio.')));
+    banners.append(banner('warn', h('p', {}, 'Abre esta app dentro de Polkadot Desktop o de la Polkadot App para conectar tu cuenta. Fuera del Host solo puedes ver el inicio y los dibujos compartidos.')));
   if (s.session === 'error')
     banners.append(
       banner(
@@ -110,6 +110,7 @@ function render(route: Route): void {
   renderNav(route);
   renderBanners();
   clear(main);
+  main.classList.toggle('is-home', route.name === 'home');
   const s = store.get();
   if (!PUBLIC_ROUTES.has(route.name) && !s.me) {
     main.append(lockedScreen(() => void connect()));
@@ -129,7 +130,7 @@ function render(route: Route): void {
   document.title = `${APP_NAME} · ${titles[route.name]}`;
   switch (route.name) {
     case 'home':
-      homeScreen(main);
+      cleanup = homeScreen(main);
       break;
     case 'editor':
       cleanup = editorScreen(main, route.id);
@@ -189,9 +190,8 @@ store.subscribe((n, p) => {
         renderBanners();
       }
     } else render(currentRoute());
-  } else if (n.totalDrawings !== p.totalDrawings || n.myCount !== p.myCount) {
-    if (currentRouteName === 'home') render(currentRoute());
   }
+  // Inicio actualiza sus contadores solo (sin reiniciar la animación).
 });
 
 // ---------- Inicio ----------

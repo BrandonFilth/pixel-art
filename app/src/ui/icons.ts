@@ -156,6 +156,41 @@ const ICONS: Record<string, string[]> = {
   ],
 };
 
+/** Cubo negro isométrico (encabezado, junto al número de bloque). */
+export function cubeIcon(cls = 'icon icon-cube'): SVGSVGElement {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('class', cls);
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const faces: Array<[string, string]> = [
+    ['12,1.5 22,7 12,12.5 2,7', '#4a4a4a'], // arriba
+    ['2,7 12,12.5 12,23 2,17.5', '#000000'], // izquierda
+    ['22,7 12,12.5 12,23 22,17.5', '#262626'], // derecha
+  ];
+  for (const [points, fill] of faces) {
+    const p = document.createElementNS(SVG_NS, 'polygon');
+    p.setAttribute('points', points);
+    p.setAttribute('fill', fill);
+    p.setAttribute('stroke', '#000');
+    p.setAttribute('stroke-width', '1.2');
+    p.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(p);
+  }
+  // Brillo en las aristas visibles para que se lea el volumen.
+  for (const [x1, y1, x2, y2] of [[12, 12.5, 12, 22], [3, 7, 12, 12], [21, 7, 12, 12]] as const) {
+    const l = document.createElementNS(SVG_NS, 'line');
+    l.setAttribute('x1', String(x1));
+    l.setAttribute('y1', String(y1));
+    l.setAttribute('x2', String(x2));
+    l.setAttribute('y2', String(y2));
+    l.setAttribute('stroke', '#7a7a7a');
+    l.setAttribute('stroke-width', '0.8');
+    svg.appendChild(l);
+  }
+  return svg;
+}
+
 export function icon(name: keyof typeof ICONS | string, cls = 'icon'): SVGSVGElement {
   const rows = ICONS[name] ?? ICONS.warn!;
   const svg = document.createElementNS(SVG_NS, 'svg');

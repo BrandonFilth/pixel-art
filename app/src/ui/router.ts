@@ -11,7 +11,8 @@ export interface Route {
   raw: string;
 }
 
-export const PUBLIC_ROUTES: ReadonlySet<RouteName> = new Set(['home', 'invalid']);
+// El detalle es público para que los enlaces compartidos se abran sin conectar cuenta.
+export const PUBLIC_ROUTES: ReadonlySet<RouteName> = new Set(['home', 'detail', 'invalid']);
 
 export function parseRoute(hash: string): Route {
   const raw = hash.replace(/^#/, '') || '/';
